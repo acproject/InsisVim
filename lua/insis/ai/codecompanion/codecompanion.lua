@@ -197,8 +197,8 @@ code.setup({
             },
           },
           defaults = {
-            -- auth_method = "gemini-api-key", -- "oauth-personal" | "gemini-api-key" | "vertex-ai"
-            auth_method = "oauth-personal",
+            auth_method = "gemini-api-key", -- "oauth-personal" | "gemini-api-key" | "vertex-ai"
+            -- auth_method = "oauth-personal",
             -- auth_method = "vertex-ai",
           },
         })
