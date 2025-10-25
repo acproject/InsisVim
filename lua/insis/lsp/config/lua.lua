@@ -5,35 +5,18 @@ return {
   ---@diagnostic disable-next-line: unused-local
   on_setup = function(_server)
     vim.lsp.config("lua_ls", {
-      cmd = { "lua-language-server" },
-      filetypes = { "lua" },
-      root_markers = {
-        ".luarc.json",
-        ".luarc.jsonc",
-        ".luacheckrc",
-        ".stylua.toml",
-        "stylua.toml",
-        "selene.toml",
-        "selene.yml",
-        ".git",
-      },
-      on_attach = function(client, bufnr)
-        common.keyAttach(bufnr)
-        if (cfg == nil) then
-          return
+
+      on_init = function(client)
+        if client.workspace_folders then
+          local path = client.workspace_folders[1].name
+          if
+            path ~= vim.fn.stdpath("config")
+            and (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc"))
+          then
+            return
+          end
         end
-        if cfg.formatter ~= "lua_ls" then
-          common.disableFormat(client)
-        end
-        if cfg.inlay_hint then
-          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-        end
-      end,
-      settings = {
-        Lua = {
-          hint = {
-            enable = true, -- necessary
-          },
+        client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
           runtime = {
             -- Tell the language server which version of Lua you're using (most
             -- likely LuaJIT in the case of Neovim)
@@ -63,9 +46,42 @@ return {
             --   vim.api.nvim_get_runtime_file('', true),
             -- }
           },
-        },
+        })
+      end,
+
+      cmd = { "lua-language-server" },
+
+      filetypes = { "lua" },
+
+      root_markers = {
+        ".luarc.json",
+        ".luarc.jsonc",
+        ".luacheckrc",
+        ".stylua.toml",
+        "stylua.toml",
+        "selene.toml",
+        "selene.yml",
+        ".git",
+      },
+
+      on_attach = function(client, bufnr)
+        common.keyAttach(bufnr)
+        if cfg == nil then
+          return
+        end
+        if cfg.formatter ~= "lua_ls" then
+          common.disableFormat(client)
+        end
+        if cfg.inlay_hint then
+          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        end
+      end,
+
+      settings = {
+        Lua = {},
       },
     })
+
     vim.lsp.enable("lua_ls")
   end,
 }

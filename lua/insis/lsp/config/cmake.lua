@@ -9,7 +9,16 @@ local opts = {
 }
 
 return {
-  on_setup = function(server)
-    server.setup(opts)
+  on_setup = function(_server)
+    vim.lsp.config("cmake", {
+      cmd = { "cmake-language-server" },
+      filetypes = { "cmake" },
+      root_dir = require("lspconfig.util").root_pattern(".git", "build", "cmake", "CMakeLists.txt", "cmake.toml"),
+      single_file_support = true,
+      capabilities = opts.capabilities,
+      flags = opts.flags,
+      on_attach = opts.on_attach,
+    })
+    vim.lsp.enable("cmake")
   end,
 }

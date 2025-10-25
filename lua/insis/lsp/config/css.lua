@@ -31,6 +31,8 @@ local opts = {
 
 return {
   on_setup = function(server)
-    server.setup(opts)
+    -- server.setup(opts)
+    vim.lsp.config("cssls", opts)
+    vim.lsp.enable("cssls")
   end,
 }

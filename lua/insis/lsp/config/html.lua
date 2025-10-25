@@ -17,6 +17,8 @@ local opts = {
 }
 return {
   on_setup = function(server)
-    server.setup(opts)
+    -- server.setup(opts)
+    vim.lsp.config("html", opts)
+    vim.lsp.enable("html")
   end,
 }

@@ -18,7 +18,16 @@ local opts = {
   },
 }
 return {
-  on_setup = function(server)
-    server.setup(opts)
+  on_setup = function(_server)
+    vim.lsp.config("gopls", {
+      cmd = { "gopls" },
+      filetypes = { "go", "gomod", "gowork", "gotmpl" },
+      root_dir = require("lspconfig.util").root_pattern("go.mod", ".git", "go.work"),
+      capabilities = opts.capabilities,
+      flags = opts.flags,
+      on_attach = opts.on_attach,
+      settings = opts.settings,
+    })
+    vim.lsp.enable("gopls")
   end,
 }

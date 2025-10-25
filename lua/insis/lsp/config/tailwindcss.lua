@@ -4,7 +4,7 @@ local common = require("insis.lsp.common-config")
 local opts = {
 
   on_attach = function(_, bufnr)
-    common.keyAttach(bufnr)
+    -- common.keyAttach(bufnr)
   end,
   settings = {
     tailwindCSS = {

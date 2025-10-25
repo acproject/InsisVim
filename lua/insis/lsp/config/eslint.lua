@@ -13,8 +13,9 @@ local customizations = {
   { rule = "*semi", severity = "off", fixable = true },
 }
 return {
-  on_setup = function(server)
-    server.setup({
+  on_setup = function(_server)
+    vim.lsp.config("eslint", {
+      cmd = { "vscode-eslint-language-server", "--stdio" },
       filetypes = {
         "javascript",
         "javascriptreact",
@@ -64,5 +65,6 @@ return {
         end
       end,
     })
+    vim.lsp.enable("eslint")
   end,
 }

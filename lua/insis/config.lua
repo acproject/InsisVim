@@ -37,6 +37,7 @@
 ---@field docker? InsisDockerConfig Docker user config
 ---@field solidity? InsisSolidityConfig
 ---@field java? InsisJavaConfig
+---@field sql? InsisSQLConfig
 ---@field git? InsisGitConfig git user config
 ---@field mirror? InsisMirrorConfig mirror config
 local InsisUserConfig = {
@@ -543,6 +544,11 @@ local InsisUserConfig = {
   },
 
   ---@class InsisBashConfig
+  ---@field enable? boolean
+  ---@field lsp? string
+  ---@field formatter? string
+  ---@field format_on_save? boolean
+  ---@field indent? number
   bash = {
     enable = false,
     lsp = "bashls",
@@ -665,6 +671,12 @@ local InsisUserConfig = {
   java = {
     enable = false,
     indent = 4,
+  },
+
+  ---@class InsisSQLConfig
+  ---@field enable? boolean
+  sql = {
+    enable = false,
   },
 
   ---@class InsisGitConfig

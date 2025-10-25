@@ -27,7 +27,7 @@ return function(config)
     getLSPConfigMap = function()
       if config.enable then
         return {
-          solidity = require("insis.lsp.config.solidity"), -- lua/lsp/config/solidity.lua
+          solidity_ls_nomicfoundation = require("insis.lsp.config.solidity"), -- lua/lsp/config/solidity.lua
         }
       end
       return {}

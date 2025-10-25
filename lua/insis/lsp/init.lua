@@ -34,7 +34,7 @@ local servers = require("insis.env").getLSPConfigMap()
 for name, config in pairs(servers) do
   if config ~= nil and type(config) == "table" then
     -- config file must implement on_setup method
-    config.on_setup(lspconfig[name])
+    config.on_setup(name)
   else
     -- or else use default params
     lspconfig[name].setup({})

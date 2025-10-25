@@ -93,6 +93,9 @@ local init = function(userConfig)
   if userConfig.java.enable then
     table.insert(enabledEnv, require("insis.env.java")(userConfig.java))
   end
+  if userConfig.sql.enable then
+    table.insert(enabledEnv, require("insis.env.sql")(userConfig.sql))
+  end
 end
 
 -- loop through enabledEnv list and call envFunc on each Env file

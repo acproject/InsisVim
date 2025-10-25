@@ -24,7 +24,14 @@ local opts = {
 }
 
 return {
-  on_setup = function(server)
-    server.setup(opts)
+  on_setup = function(_server)
+    vim.lsp.config("clangd", {
+      cmd = opts.cmd,
+      init_options = opts.init_options,
+      capabilities = opts.capabilities,
+      flags = opts.flags,
+      on_attach = opts.on_attach,
+    })
+    vim.lsp.enable("clangd")
   end,
 }

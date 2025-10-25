@@ -24,7 +24,8 @@ local opts = {
 }
 
 return {
-  on_setup = function(server)
-    server.setup(opts)
+  on_setup = function(_)
+    vim.lsp.config("prismals", opts)
+    vim.lsp.enable("prismals")
   end,
 }
