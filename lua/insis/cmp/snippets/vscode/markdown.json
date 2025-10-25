@@ -1,1 +1,7 @@
-{}
+{
+  "code": {
+    "prefix": "code",
+    "body": ["```$1\n$0\n```"],
+    "description": "code"
+  }
+}
