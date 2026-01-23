@@ -1,7 +1,7 @@
 local autopairs = pRequire("nvim-autopairs")
 if autopairs then
   autopairs.setup({
-    check_ts = true,
+    check_ts = false,
   })
   -- If you want insert `(` after select function or method item
   local cmp_autopairs = require("nvim-autopairs.completion.cmp")

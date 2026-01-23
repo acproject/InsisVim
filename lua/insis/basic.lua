@@ -53,6 +53,8 @@ vim.o.timeoutlen = 500
 -- split window right and below
 vim.o.splitbelow = true
 vim.o.splitright = true
+vim.o.winminwidth = 10
+vim.o.winminheight = 1
 
 vim.o.termguicolors = true
 vim.opt.termguicolors = true

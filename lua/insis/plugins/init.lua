@@ -57,30 +57,7 @@ local plugins = {
     end,
   },
 
-  -- treesitter
-  {
-    "HiPhish/rainbow-delimiters.nvim",
-    config = function()
-      require("insis.plugins.rainbow-delimiters")
-    end,
-  },
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = function()
-      local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
-      ts_update()
-    end,
-    config = function()
-      require("insis.plugins.treesitter")
-    end,
-  },
-  { "windwp/nvim-ts-autotag" },
-  { "nvim-treesitter/nvim-treesitter-refactor" },
-  { "nvim-treesitter/nvim-treesitter-textobjects" },
-  { "RRethy/nvim-treesitter-endwise" },
-
   -- Comment
-  { "JoosepAlviste/nvim-ts-context-commentstring" },
   {
     "numToStr/Comment.nvim",
     config = function()
@@ -223,10 +200,10 @@ local plugins = {
   { "saadparwaiz1/cmp_luasnip" },
   -- Completion sources
   { "hrsh7th/cmp-vsnip" },
-  { "hrsh7th/cmp-nvim-lsp" }, -- { name = nvim_lsp }
-  { "hrsh7th/cmp-buffer" }, -- { name = 'buffer' },
-  { "hrsh7th/cmp-path" }, -- { name = 'path' }
-  { "hrsh7th/cmp-cmdline" }, -- { name = 'cmdline' }
+  { "hrsh7th/cmp-nvim-lsp" },                -- { name = nvim_lsp }
+  { "hrsh7th/cmp-buffer" },                  -- { name = 'buffer' },
+  { "hrsh7th/cmp-path" },                    -- { name = 'path' }
+  { "hrsh7th/cmp-cmdline" },                 -- { name = 'cmdline' }
   { "hrsh7th/cmp-nvim-lsp-signature-help" }, -- { name = 'nvim_lsp_signature_help' }
   -- common snippets
   { "rafamadriz/friendly-snippets" },
@@ -329,7 +306,7 @@ local plugins = {
   -- go
   { "leoluz/nvim-dap-go" },
 
-  --[[ 
+  --[[
   -- TODO: python not work yet
 
   {
@@ -379,6 +356,15 @@ local plugins = {
       require("mcphub").setup()
     end,
   },
+  {
+    "NickvanDyke/opencode.nvim",
+    dependencies = {
+      { "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
+    },
+    config = function()
+      require("insis.plugins.opencode")
+    end,
+  },
   -- {
   --   "CopilotC-Nvim/CopilotChat.nvim",
   --   dependencies = {
@@ -405,7 +391,7 @@ if cfg.rust.enable then
   table.insert(plugins, {
     "mrcjkb/rustaceanvim",
     version = "^5", -- Recommended
-    lazy = false, -- This plugin is already lazy
+    lazy = false,   -- This plugin is already lazy
   })
 end
 
