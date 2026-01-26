@@ -55,3 +55,65 @@ keymap({ "i", "s" }, cfg.keys.snip_prev_choice, function()
     luasnip.change_choice(-1)
   end
 end)
+
+local cmp = pRequire("cmp")
+
+local function feedkey(keys)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, false, true), "n", true)
+end
+
+keymap({ "i", "s" }, "<Tab>", function()
+  if cmp and cmp.visible() then
+    cmp.select_next_item()
+    return
+  end
+  if luasnip.expand_or_jumpable() then
+    luasnip.expand_or_jump()
+    return
+  end
+  feedkey("<Tab>")
+end)
+
+keymap({ "i", "s" }, "<S-Tab>", function()
+  if cmp and cmp.visible() then
+    cmp.select_prev_item()
+    return
+  end
+  if luasnip.jumpable(-1) then
+    luasnip.jump(-1)
+    return
+  end
+  feedkey("<S-Tab>")
+end)
+
+keymap({ "i", "s" }, "<Down>", function()
+  if cmp and cmp.visible() then
+    cmp.select_next_item()
+    return
+  end
+  feedkey("<Down>")
+end)
+
+keymap({ "i", "s" }, "<Up>", function()
+  if cmp and cmp.visible() then
+    cmp.select_prev_item()
+    return
+  end
+  feedkey("<Up>")
+end)
+
+keymap({ "i", "s" }, "<Right>", function()
+  if cmp and cmp.visible() then
+    cmp.select_next_item()
+    return
+  end
+  feedkey("<Right>")
+end)
+
+keymap({ "i", "s" }, "<Left>", function()
+  if cmp and cmp.visible() then
+    cmp.select_prev_item()
+    return
+  end
+  feedkey("<Left>")
+end)

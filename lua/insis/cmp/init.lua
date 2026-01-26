@@ -24,6 +24,56 @@ local mapping = {
   [cfg.keys.scroll_doc_down] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
   [cfg.keys.select_prev_item] = cmp.mapping.select_prev_item(),
   [cfg.keys.select_next_item] = cmp.mapping.select_next_item(),
+  ["<Tab>"] = cmp.mapping(function(fallback)
+    if cmp.visible() then
+      cmp.select_next_item()
+      return
+    end
+    if luasnip.expand_or_jumpable() then
+      luasnip.expand_or_jump()
+      return
+    end
+    fallback()
+  end, { "i", "s" }),
+  ["<S-Tab>"] = cmp.mapping(function(fallback)
+    if cmp.visible() then
+      cmp.select_prev_item()
+      return
+    end
+    if luasnip.jumpable(-1) then
+      luasnip.jump(-1)
+      return
+    end
+    fallback()
+  end, { "i", "s" }),
+  ["<Down>"] = cmp.mapping(function(fallback)
+    if cmp.visible() then
+      cmp.select_next_item()
+      return
+    end
+    fallback()
+  end, { "i", "s" }),
+  ["<Up>"] = cmp.mapping(function(fallback)
+    if cmp.visible() then
+      cmp.select_prev_item()
+      return
+    end
+    fallback()
+  end, { "i", "s" }),
+  ["<Right>"] = cmp.mapping(function(fallback)
+    if cmp.visible() then
+      cmp.select_next_item()
+      return
+    end
+    fallback()
+  end, { "i", "s" }),
+  ["<Left>"] = cmp.mapping(function(fallback)
+    if cmp.visible() then
+      cmp.select_prev_item()
+      return
+    end
+    fallback()
+  end, { "i", "s" }),
 }
 
 -- select next/prev in command mode
