@@ -56,6 +56,8 @@ local plugins = {
         "clangd",
         "clang-format",
         "codelldb",
+        "cmake-language-server",
+        "cmakelang",
       }
     }
   }

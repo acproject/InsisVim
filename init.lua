@@ -1,2 +1,2 @@
 require("insis").setup({})
-vim.cmd("MasonInstallAll")
+pcall(vim.cmd, "MasonInstallAll")

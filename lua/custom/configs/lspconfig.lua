@@ -11,3 +11,12 @@ lspconfig.clangd.setup {
   end,
   capabilities = capabilities,
 }
+
+lspconfig.cmake.setup {
+  cmd = { "cmake-language-server" },
+  filetypes = { "cmake" },
+  root_dir = lspconfig.util.root_pattern(".git", "build", "cmake", "CMakeLists.txt", "cmake.toml"),
+  single_file_support = true,
+  on_attach = on_attach,
+  capabilities = capabilities,
+}

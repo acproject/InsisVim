@@ -3,7 +3,7 @@ return function(config)
   return {
     getFormatOnSavePattern = function()
       if config.format_on_save then
-        return { "*.c", "*.cpp", "*.cc" }
+        return { "*.c", "*.cpp", "*.cc", "*.cmake", "CMakeLists.txt" }
       end
       return {}
     end,
@@ -13,18 +13,19 @@ return function(config)
     end,
 
     getLSPEnsureList = function()
-      return { "clangd" }
+      return { "clangd", "cmake" }
     end,
 
     getLSPConfigMap = function()
       return {
         clangd = require("insis.lsp.config.clangd"),
+        cmake = require("insis.lsp.config.cmake"),
       }
     end,
 
     getToolEnsureList = function()
       if config.formatter == "clang-format" then
-        return { "clang-format" }
+        return { "clang-format", "cmakelang" }
       end
       return {}
     end,
@@ -35,7 +36,10 @@ return function(config)
         return {}
       end
       if config.formatter == "clang-format" then
-        return { null_ls.builtins.formatting.clang_format }
+        return {
+          null_ls.builtins.formatting.clang_format,
+          null_ls.builtins.formatting.cmake_format,
+        }
       end
       return {}
     end,
